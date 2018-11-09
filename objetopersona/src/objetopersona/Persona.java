@@ -23,6 +23,7 @@ public class Persona {
         nombre="";
         edad=0;
         dni=generarDNI();
+        
         sexo=HOMBRE;
         peso=0;
         altura=0;

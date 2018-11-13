@@ -5,58 +5,60 @@
  */
 package objetopersona;
 
+import java.util.Random;
+
 /**
  *
  * @author alumno
  */
 public class Persona {
-    private final String HOMBRE = "H";
-    private final String MUJER = "M";
+    private final char HOMBRE = 'H';
+    private final char MUJER = 'M';
     private final int PINF = -1;
     private final int PN = 0;
     private final int PO = +1;
     private String nombre; 
     private int edad;
     private String dni;
-    private String sexo;
-    private int peso;
-    private int altura;
-    private final boolean ME=false;
+    private char sexo;
+    private double peso;
+    private double altura;
+    private final boolean MAYORE=true;
+    private final boolean MENORE=false;
     
     
         public Persona() {
             nombre="";
             edad=0;
             dni=generarDNI();
-
             sexo=HOMBRE;
             peso=0;
             altura=0;
-
+            
         }
 
-        public Persona(String nombre, int edad, String dni, String sexo, int peso, int altura) {
+        public Persona(String nombre, int edad, String dni, char sexo, double peso, double altura) {
             this.nombre = nombre;
             this.edad = edad;
             this.dni = dni;
-            this.sexo = sexo;
+            comprobarSexo(sexo);
             this.peso = peso;
             this.altura = altura;
         }
-        public Persona(String nombre, int edad) {
+        public Persona(String nombre, int edad, char sexo) {
            this.nombre = nombre;
            this.edad = edad;
-           this.dni = dni;
-           this.sexo = sexo;
+           this.dni = generarDNI();
+           comprobarSexo(sexo);
            this.peso = peso;
            this.altura = altura;
         }
 
             public int calcularIMC(){
-            int imc;
+            double imc;
             imc=peso/(altura*altura);
                 if (imc<18.5) {
-                    return PINF;
+                    return PINF; 
                 }else if (imc>30) {
                     return PO;
 
@@ -66,13 +68,55 @@ public class Persona {
             }
             public boolean esMayorDeEdad(){
                 if (edad>=18) {
-                    ME=true;
-                }else
-                    ME=false;
+                    return MAYORE;
+                }else{
+                    return MENORE;
+                }
             }
-            public void generarDNI(){
             
+            private String generarDNI(){
+                String dni;
+                 Random r=new Random();
+                 dni="";
+                for (int i = 0; i < 8; i++) {
+                    dni+=Integer.toString(r.nextInt(10));
+                }
+                 
+                dni+= calcularLetra(dni);
+                System.out.println(dni);
+                 return dni;
             }
+            private String calcularLetra(String dni){
+                 String[] vLetras = {"T", "R", "W", "A", "G", "M", "Y", "F", "P", "D", "X", "B", "N", "J", "Z", "S", "Q", "V", "H", "L", "C", "K", "E"};
+                String letras = "TRWAGMYFPDXBNJZSQVHLCKE";
+                 int cletra=0;
+                String letra="";
+                for (int i = 0; i < 8; i++) {
+                    cletra+= Integer.parseInt(dni.substring(i,i+1)) ;
+                }
+              cletra=cletra%23;
+               
+                letra=vLetras[cletra];
+              
+                
+                return letra;
+            }
+            private void comprobarSexo(char sexo){
+            if (sexo==HOMBRE || sexo==MUJER){
+                this.sexo=sexo;
+            }else {
+                this.sexo=HOMBRE;
+            }
+                
+                }
+
+    @Override
+    public String toString() {
+        return "Persona{" + "nombre=" + nombre + ", edad=" + edad + ", dni=" + dni + ", sexo=" + sexo + ", peso=" + peso + ", altura=" + altura + '}';
+    }
+
+    
+            
 }
 
 

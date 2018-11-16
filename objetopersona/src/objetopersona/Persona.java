@@ -9,7 +9,7 @@ import java.util.Random;
 
 /**
  *
- * @author alumno
+ * @author dra69
  */
 public class Persona {
     private final char HOMBRE = 'H';
@@ -73,6 +73,12 @@ public class Persona {
                     return MENORE;
                 }
             }
+
+    public String getNombre() {
+        return nombre;
+    }
+            
+            
             
             private String generarDNI(){
                 String dni;
@@ -83,7 +89,7 @@ public class Persona {
                 }
                  
                 dni+= calcularLetra(dni);
-                System.out.println(dni);
+                
                  return dni;
             }
             private String calcularLetra(String dni){

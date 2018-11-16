@@ -22,6 +22,10 @@ public class Coche {
         this.matricula = matricula;
     }
 
+    public String getMatricula() {
+        return matricula;
+    }
+
     public Coche() {
         propietario=new Persona();
         plazas= 5;
